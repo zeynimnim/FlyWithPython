@@ -1,0 +1,18 @@
+annual_salary = int(input("Enter your annual salary: ")) #60.000
+portion_saved = float(input("Enter the percent of your salary to save, as a decimal: ")) #0.1 0.3 gibi aylik ayirmak istedigimiz maas orani
+monthly_saved = (annual_salary / 12.0) * portion_saved #aylik ayirdigim para 1250
+
+total_cost = int(input("Enter the cost of your dream home: ")) #500.000
+portion_down_payment = total_cost * 0.25 #Evin 0.25 ini pesinat verecegiz
+
+current_savings = 0.0 #biriktirdigimiz para
+annual_return = 0.04 #yillik faiz getirisi
+months = 0 #kac ay tasarruf yapmamiz gerektigi
+
+while current_savings < portion_down_payment: #biriktirdigimiz para, ihtiyacimiz olan pesinata esit olana kadar while dongusu doner
+    months += 1 # months = montsh + 1
+    #mevcut birikimin hepsi faize veriliyor 
+    monthly_return = current_savings * (annual_return / 12) #aylik faiz getirisi hesaplaniyor
+    current_savings += monthly_return + monthly_saved #toplam birikime aylik birikim ekleniyor
+
+print("Number of months:", months)
