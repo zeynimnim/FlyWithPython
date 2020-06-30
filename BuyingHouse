@@ -1,0 +1,37 @@
+""" BIR EVIN FIYATI VE GERCEK DEGERI
+    Bir gayrimenkule yatirim yapmak istiyoruz ve ev seciyoruz.
+    Bu evi alirken bugunku fiyatini oderiz, ancak odemeden once evin gercek degerini hesaplamaliyiz.
+    Evin bize gelecekte getirecegi kiralari ve satis fiyatini Net Present Value yaparak bugune indirger, gercek degerini hesaplariz.
+    Ve gelecekteki deger ile odemek uzere oldugumuz degeri karsilastiririz. Kar-zarar durumuna gore evi satin aliriz veya almayiz.
+"""
+#Atasehirde 4+1 ev 2,299,000 tl'ye satiliyor. Bu evi almali miyiz? Bu evin gercek ederi nedir?
+#Evin gercek degeri  = 10 yillik kira getirisi + 10 yil sonunda evi satis fiyati
+#Not: Her bir kira getirisinin net present value'su hesaplanacaktir. 
+
+r = 0.15 #TCMB'deki yillik faiz orani(paranin maliyeti)
+first_price = int(input("Alinmasi dusunulen evin satis fiyatini giriniz: ")) #2.299.000
+last_price = int(input("10 yil sonra bu kadara satarim dediginiz fiyat: ")) #3.000.000
+monthly_rent = int(input("Muhitteki 4+1 ortalama kira fiyatini giriniz: ")) #7.000
+time = int(input("Kac yil sonra evi satacaksiniz? ")) #10
+rent_tax = 17000
+annual_rent = monthly_rent*12 - rent_tax
+real_value = 0
+def doCount(time, r):
+  if (time==0):
+    return 1
+  return (1+r)*doCount(time-1,r)
+count = 0
+for i in range(time-1):
+  net_present_value = annual_rent /doCount(i+1,r)
+  count = count + net_present_value
+net_present_value = (last_price + annual_rent) /doCount(time,r)
+count = count +  net_present_value
+print("Satin almayi dusundugunuz evin gercek degeri: " ,count)
+if count < first_price:
+  print("Ev, ederinden daha pahali satiliyor ve ",time," yil icinde kar etmeyeceksiniz")\
+#TCMB faizi dusurse evin gercek degeri artmaz mi?
+#%5 yaparsa evin alinabilir ancak faizi dusurmek uzun sureli cozum yolu degildir
+#Evin gercek degerinin artmasinin sonucu faizin dusmesidir cozum yolu,
+#Ev fiyatlari, insanlarin gelirleri arttikca dogal yoldan artar
+#Insanlarin gelirleri cok artmiyor ancak ev fiyatlari bu ornekte oldugu gibi cok artiyorsa burada ekonomik krize gidilme ihtimali vardir..
+
