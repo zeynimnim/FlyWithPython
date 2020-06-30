@@ -1,0 +1,24 @@
+#PARANIN ZAMAN DEGERI NEDIR?
+#Sahip oldugunuz paranin gelecekte ne kadar degerde olacaginin veya gelecekte sahip olacaginiz paranin bugun hesaplanmas ne kadar degeri oldugunun hesaplanmasidir.
+first_value = int(input("Para miktarini giriniz: "))
+time = int(input("Yil sayisi giriniz: ")) 
+r = 0.2 
+"""Turkiye Cumhuriteyi Yillik Faiz Orani r = 0.2 kabul edildi
+   ay girilmek istenirse r degeri de r/ 12 yapilmali
+   gun girilmek istenirse r degeri r/365 yapilmali
+"""
+def doCount(time, r):
+  if (time==0):
+    return 1
+  return (1+r)*doCount(time-1,r)
+future_value = first_value*doCount(time,r)
+net_present_value = first_value/doCount(time,r)
+print( time ," yil bankada faizle kavrulacak", first_value,"liranin geri donusu: " , future_value)
+#FUTURE VALUE(Paranin Gelecekteki Degeri)
+#100 liranizi bankaya yatirirsaniz 2 yil sonra bankada faizlenip 144 lira oluyor.
+print( time ," yil sonra hesabiniza gelecek", first_value,"liranin bugunku degeri : " , net_present_value)
+#NET PRESENT VALUE (Paranin Bugunku Degeri)
+#Su anki 144 lira 2 yil sonra 100 liraya denk gelir
+#Biri size 2 yil sonra 100 lira verecegini soylerse bugun 69.4 lira vermis olur.
+
+
